@@ -11,6 +11,8 @@
         Output: deepest, 9; depth, 3
  */
 
+
+
 class TreeNode{
     constructor (data, left = null ,right = null) {
         this.data = data;
@@ -48,20 +50,70 @@ class BinarySerchTree{
             return searchTree(node);
         }
     }
+
+    findMaxNum(){
+        let currentNode = this.root;
+        while (currentNode.right !== null){
+            currentNode = currentNode.right;
+        }
+        return currentNode.data;
+    }
+    findMinNum(){
+        let currentNode = this.root;
+        while (currentNode.left !== null){
+            currentNode = currentNode.left
+        }
+        return currentNode.data;
+    }
+
+    findNode(data) {
+        let currentNode = this.root;
+        while (currentNode.data !== data) {
+            if (data < currentNode.data) {
+                currentNode = currentNode.left;
+            } else {
+                currentNode = currentNode.right;
+            }
+            if (currentNode === null) {
+                return null;
+            }
+        }
+        return currentNode;
+    }
+
+    isPresent (data) {
+        let currentNode = this.root;
+        while (currentNode) {
+            if (data === currentNode.data) {
+                return true;
+            }
+            if (data < currentNode.data) {
+                currentNode = currentNode.left;
+            } else {
+                currentNode = currentNode.right;
+            }
+        }
+        return false;
+    }
+
 }
 
 function buildBT(){
     const BST = new BinarySerchTree();
 
-    let numbers = [33,22,66,77,88,9,3];
+    let numbers = [33,22,14,77,58,9,11];
 
     for (let n in numbers){
         BST.add(numbers[n])
     }
 
+    //TEST BINARY TREE BUILD
     console.log(BST);
-    console.log(BST.root.left);
-    console.log(BST.root.right);
+    //TEST METHODS
+    console.log("Max number" + BST.findMaxNum());
+    console.log("Min Number" + BST.findMinNum());
+    console.log("Is number present" + BST.isPresent(33));
+    console.log("Node found" + BST.findNode(33))
 }
 
 
