@@ -96,6 +96,39 @@ class BinarySerchTree{
         return false;
     }
 
+    findDeep(currentNode = this.root) {
+        if (currentNode == null) {
+            return -1;
+        }
+        let left = this.findDeep(currentNode.left);
+        let right = this.findDeep(currentNode.right);
+        if (left > right) {
+            return left + 1;
+        } else {
+            return right + 1;
+        }
+    }
+
+    findDeepest(currentNode = this.root){
+        if(currentNode == null){
+            return null;
+        }
+        let node = null;
+
+        let queue = [];
+        queue.push(currentNode);
+
+        while(queue.length > 0){
+            node = queue.shift();
+            if(node.left !== null){
+                queue.push(node.left)
+            }
+            if(node.right !== null){
+                queue.push(node.right)
+            }
+        }
+        return node.data;
+    }
 }
 
 function buildBT(){
@@ -112,8 +145,10 @@ function buildBT(){
     //TEST METHODS
     console.log("Max number" + BST.findMaxNum());
     console.log("Min Number" + BST.findMinNum());
-    console.log("Is number present" + BST.isPresent(33));
-    console.log("Node found" + BST.findNode(33))
+    console.log("Is number present " + BST.isPresent(33));
+    console.log("Node found " + BST.findNode(33))
+    console.log("Deep ", BST.findDeep());
+    console.log("Deepest Node " + BST.findDeepest());
 }
 
 
