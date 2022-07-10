@@ -27,25 +27,17 @@ class BinarySerchTree{
     }
     add(data) {
         const node = this.root;
-        if (node === null) {
-            this.root = new TreeNode(data);
-        } else {
+        if (!node) this.root = new TreeNode(data);
+         else {
             const searchTree = function(node) {
                 if (data < node.data) {
-                    if (node.left === null) {
-                        node.left = new TreeNode(data);
-                    } else if (node.left !== null) {
+                    if (!node.left) node.left = new TreeNode(data);
+                     else if (node.left)
                         return searchTree(node.left);
-                    }
                 } else if (data > node.data) {
-                    if (node.right === null) {
-                        node.right = new TreeNode(data);
-                    } else if (node.right !== null) {
-                        return searchTree(node.right);
-                    }
-                } else {
-                    return null;
-                }
+                    if (!node.right) node.right = new TreeNode(data);
+                     else if (node.right) return searchTree(node.right);
+                } else return null;
             };
             return searchTree(node);
         }
@@ -53,14 +45,14 @@ class BinarySerchTree{
 
     findMaxNum(){
         let currentNode = this.root;
-        while (currentNode.right !== null){
+        while (currentNode.right){
             currentNode = currentNode.right;
         }
         return currentNode.data;
     }
     findMinNum(){
         let currentNode = this.root;
-        while (currentNode.left !== null){
+        while (currentNode.left){
             currentNode = currentNode.left
         }
         return currentNode.data;
@@ -69,14 +61,9 @@ class BinarySerchTree{
     findNode(data) {
         let currentNode = this.root;
         while (currentNode.data !== data) {
-            if (data < currentNode.data) {
-                currentNode = currentNode.left;
-            } else {
-                currentNode = currentNode.right;
-            }
-            if (currentNode === null) {
-                return null;
-            }
+            if (data < currentNode.data) currentNode = currentNode.left;
+            else currentNode = currentNode.right;
+            if (!currentNode) return null;
         }
         return currentNode;
     }
@@ -84,35 +71,24 @@ class BinarySerchTree{
     isPresent (data) {
         let currentNode = this.root;
         while (currentNode) {
-            if (data === currentNode.data) {
-                return true;
-            }
-            if (data < currentNode.data) {
-                currentNode = currentNode.left;
-            } else {
-                currentNode = currentNode.right;
-            }
+            if (data === currentNode.data) return true;
+            if (data < currentNode.data) currentNode = currentNode.left;
+            else currentNode = currentNode.right;
         }
         return false;
     }
 
     findDeep(currentNode = this.root) {
-        if (currentNode == null) {
-            return -1;
-        }
+        if (!currentNode) return -1;
         let left = this.findDeep(currentNode.left);
         let right = this.findDeep(currentNode.right);
-        if (left > right) {
-            return left + 1;
-        } else {
-            return right + 1;
-        }
+        if (left > right) return left + 1;
+         else return right + 1;
     }
 
     findDeepest(currentNode = this.root){
-        if(currentNode == null){
-            return null;
-        }
+        if(!currentNode) return null;
+
         let node = null;
 
         let queue = [];
@@ -120,10 +96,10 @@ class BinarySerchTree{
 
         while(queue.length > 0){
             node = queue.shift();
-            if(node.left !== null){
+            if(node.left){
                 queue.push(node.left)
             }
-            if(node.right !== null){
+            if(node.right){
                 queue.push(node.right)
             }
         }
