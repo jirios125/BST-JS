@@ -78,10 +78,10 @@ class BinarySerchTree{
         return false;
     }
 
-    findDeep(currentNode = this.root) {
+    findDepth(currentNode = this.root) {
         if (!currentNode) return -1;
-        let left = this.findDeep(currentNode.left);
-        let right = this.findDeep(currentNode.right);
+        let left = this.findDepth(currentNode.left);
+        let right = this.findDepth(currentNode.right);
         if (left > right) return left + 1;
          else return right + 1;
     }
@@ -110,7 +110,7 @@ class BinarySerchTree{
 function buildBT(){
     const BST = new BinarySerchTree();
 
-    let numbers = [33,22,14,77,58,9,11];
+    let numbers = [12,11,90,82,7,9];
 
     for (let n in numbers){
         BST.add(numbers[n])
@@ -123,7 +123,7 @@ function buildBT(){
     console.log("Min Number" + BST.findMinNum());
     console.log("Is number present " + BST.isPresent(33));
     console.log("Node found " + BST.findNode(33))
-    console.log("Deep ", BST.findDeep());
+    console.log("Depth ", BST.findDepth());
     console.log("Deepest Node " + BST.findDeepest());
 }
 
