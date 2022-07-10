@@ -43,6 +43,38 @@ class BinarySerchTree{
         }
     }
 
+    remove(data, currentNode = this.root) {
+        if (!currentNode) return null;
+        if (data < currentNode.data) {
+            currentNode.left = this.remove(currentNode.left, data);
+            return currentNode;
+        } else if (data > currentNode.data) {
+            currentNode.right = this.remove(currentNode.right, data);
+            return currentNode;
+        } else {
+            // No children
+            //case 1 - a leaf node
+            if (!currentNode.left && !currentNode.right) {
+                currentNode = null;
+                return currentNode;
+            }
+            // Single Child cases
+            if (currentNode.left === null) return currentNode.right;
+            if (currentNode.right === null) return currentNode.left;
+
+            // Both children, so need to find successor
+            let currNode = currentNode.right;
+            while (currNode.left !== null) {
+                currNode = currNode.left;
+            }
+            currentNode.data = currNode.data;
+            // Delete the value from right subtree.
+            currentNode.right = this.remove(currentNode.right, currNode.data);
+            return currentNode;
+        }
+    }
+
+
     findMaxNum(){
         let currentNode = this.root;
         while (currentNode.right){
@@ -50,6 +82,7 @@ class BinarySerchTree{
         }
         return currentNode.data;
     }
+
     findMinNum(){
         let currentNode = this.root;
         while (currentNode.left){
@@ -110,23 +143,29 @@ class BinarySerchTree{
 function buildBT(){
     const BST = new BinarySerchTree();
 
+    //Numbers to ADD
     let numbers = [12,11,90,82,7,9];
 
+    //ADD METHOD
     for (let n in numbers){
         BST.add(numbers[n])
     }
-
-    //TEST BINARY TREE BUILD
     console.log(BST);
+
+    //REMOVE METHOD
+    // BST.remove(12);
+    // console.log(BST);
+
     //TEST METHODS
     console.log("Max number" + BST.findMaxNum());
     console.log("Min Number" + BST.findMinNum());
-    console.log("Is number present " + BST.isPresent(33));
+    console.log("Is number present " + BST.isPresent(30));
     console.log("Node found " + BST.findNode(33))
+
+    // // OUTPUT REQUIRED FOR THIS TEST
     console.log("Depth ", BST.findDepth());
     console.log("Deepest Node " + BST.findDeepest());
 }
-
 
 buildBT();
 
