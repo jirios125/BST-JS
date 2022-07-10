@@ -138,6 +138,20 @@ class BinarySerchTree{
         }
         return node.data;
     }
+
+    inOrder() {
+        if (!this.root) return null;
+        else {
+            let result = [];
+            function traverseInOrder(node) {
+                node.left && traverseInOrder(node.left);
+                result.push(node.data);
+                node.right && traverseInOrder(node.right);
+            }
+            traverseInOrder(this.root);
+            return result;
+        }
+    }
 }
 
 function buildBT(){
@@ -161,6 +175,10 @@ function buildBT(){
     console.log("Min Number" + BST.findMinNum());
     console.log("Is number present " + BST.isPresent(30));
     console.log("Node found " + BST.findNode(33))
+
+    //ORDER METHODS
+    console.log("BinaryTree in order: " + BST.inOrder());
+    console.log("BinaryTree in pre-order: " + numbers);
 
     // // OUTPUT REQUIRED FOR THIS TEST
     console.log("Depth ", BST.findDepth());
