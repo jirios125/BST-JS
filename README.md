@@ -1,7 +1,7 @@
 # BST-JS
 TO ADD:<br>
 	-findDeepest -> Should return all of the deepest nodes<br>
-	-Add some validations when making the bt (repeated numbers, ordered numbers, righ-child only, left-child only)<br>
+	-Add some validations when making the bt (ordered numbers, righ-child only, left-child only)<br>
 	-Make some testing for all the methods of the tree<br>
 
 
