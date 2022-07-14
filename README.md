@@ -1,5 +1,13 @@
 # BST-JS
 
+
+TO ADD:
+	-findDeepest -> Should return all of the deepest nodes
+	-Add some validations when making the bt (repeated numbers, ordered numbers, righ-child only, left-child only)
+	-Make some testing for all the methods of the tree
+
+
+<br>
 Hi, I'm glad you are reading this.
 This is a test done for Slingr/Veritone.
 
